@@ -61,13 +61,16 @@ class Bot:
     def fill_tree(self):
         tree = LinkedBST()
         node = Node(self.board)
+        print(node)
         for i in range(9):
+
             if self.board.coordinates[i] is None:
                 self.board.coordinates[i] = 'X'
-                node.add_child(self.board)
+                node.add_child((self.board))
                 self.board.coordinates[i] = None
+                #print(1, node)
         tree.add(node)
-        print(tree)
+
 
     def make_move(self, board):
         move = random.randint(0, 8)
