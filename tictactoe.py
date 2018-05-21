@@ -1,6 +1,7 @@
 import random
 from linkedbst import LinkedBST
 from TreeNode import Node
+from copy import deepcopy
 
 class Board:
     WINNER = None
@@ -61,14 +62,12 @@ class Bot:
     def fill_tree(self):
         tree = LinkedBST()
         node = Node(self.board)
-        print(node)
         for i in range(9):
-
             if self.board.coordinates[i] is None:
-                self.board.coordinates[i] = 'X'
-                node.add_child((self.board))
-                self.board.coordinates[i] = None
-                #print(1, node)
+                prototype = deepcopy(self.board)
+                prototype.coordinates[i] = 'X'
+                node.add_child(prototype)
+        print(node)
         tree.add(node)
 
 

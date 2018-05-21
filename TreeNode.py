@@ -24,12 +24,12 @@ class Node:
         for i in range(9):
             if self._all[i] is None:
                 self._all[i] = data
-                print(self._all, '\n' + str(self._all[i]))
+                #print(self._all, '\n' + str(self._all[i]))
                 break
 
     def __str__(self):
-        result = str(self.data)
+        result = str(self.data) + '\n'
         for e in self._all:
             if e:
-                result += str(e)
+                result += str(e) + '\n'
         return result
