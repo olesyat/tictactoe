@@ -28,7 +28,7 @@ class Node:
                 break
 
     def __str__(self):
-        result = str(self.data) + ''
+        result = str(self.data) + '\n'
         for e in self._all:
             if e:
                 result += str(e) + '\n'
