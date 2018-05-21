@@ -67,7 +67,6 @@ class Bot:
                 prototype = deepcopy(self.board)
                 prototype.coordinates[i] = 'X'
                 node.add_child(prototype)
-        print(node)
         tree.add(node)
 
 

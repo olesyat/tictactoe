@@ -24,7 +24,6 @@ class Node:
         for i in range(9):
             if self._all[i] is None:
                 self._all[i] = data
-                #print(self._all, '\n' + str(self._all[i]))
                 break
 
     def __str__(self):
