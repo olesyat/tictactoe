@@ -1,7 +1,6 @@
 from node_tree import Node, Tree
 from copy import deepcopy
 
-
 class Board:
     WINNER = None
 
