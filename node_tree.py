@@ -13,10 +13,8 @@ class Node:
         except:
             return 'ancestor'
 
-
     def add_child(self, child):
         self.children.append(child)
-
 
     def has_children(self):
         return len(self.children) != 0
@@ -33,7 +31,6 @@ class Node:
             for child in self.children:
                 self.chance += child.count_chance()
         return self.chance
-
 
 
 class Tree:

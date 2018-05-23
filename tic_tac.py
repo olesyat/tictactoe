@@ -1,6 +1,7 @@
 from node_tree import Node, Tree
 from copy import deepcopy
 
+
 class Board:
     WINNER = None
 
@@ -34,7 +35,7 @@ class Board:
                     return True
 
         for i in range(2):
-            if self.coordinates[2 * i] == self.coordinates[4] == self.coordinates[8 - 2*i]:
+            if self.coordinates[2 * i] == self.coordinates[4] == self.coordinates[8 - 2 * i]:
                 Board.WINNER = self.coordinates[4]
                 if Board.WINNER:
                     return True
@@ -57,6 +58,7 @@ class Board:
 
 class Player:
     SYMBOL = 'X'
+
     def __init__(self, board):
         self.board = board
 
@@ -66,14 +68,17 @@ class Player:
             move = int(input("Please enter the position you want to place a symbol: "))
         self.board.set_mark(self.SYMBOL, move)
 
+
 class Bot:
     SYMBOL = 'O'
+
     def __init__(self, board):
         self.board = board
         self.TREE = None
 
     def fill_tree(self):
         self.TREE = Tree(Node(self.board, None))
+
         def helper(node):
             for j in range(9):
                 if node.data.coordinates[j] is None:
@@ -101,9 +106,7 @@ class Bot:
                         if Board.WINNER == 'X':
                             node.chance -= 1
                         if Board.WINNER == 'O':
-                             node.chance += 1
-
-
+                            node.chance += 1
 
         helper(self.TREE._root)
         options = []
