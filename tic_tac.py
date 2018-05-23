@@ -1,3 +1,7 @@
+from node_tree import Node, Tree
+from copy import deepcopy
+
+
 class Board:
     WINNER = None
 
@@ -61,4 +65,55 @@ class Player:
         move = int(input("Please enter the position you want to place a symbol: "))
         while self.board.coordinates[move] is not None and 0 <= move < 9:
             move = int(input("Please enter the position you want to place a symbol: "))
+        self.board.set_mark(self.SYMBOL, move)
+
+class Bot:
+    SYMBOL = 'O'
+    def __init__(self, board):
+        self.board = board
+        self.TREE = None
+
+    def fill_tree(self):
+        self.TREE = Tree(Node(self.board, None))
+        def helper(node):
+            for j in range(9):
+                if node.data.coordinates[j] is None:
+                    prototype = deepcopy(node.data)
+                    if prototype.last_value == 'X':
+                        prototype.set_mark('O', j)
+                        prototype.last_position = j
+                    elif prototype.last_value == 'O':
+                        prototype.set_mark('X', j)
+                        prototype.last_position = j
+                    else:
+                        prototype.set_mark('X', j)
+                        prototype.last_position = j
+
+                    _child = Node(prototype, node)
+                    node.add_child(_child)
+
+                    if prototype.tie():
+                        pass
+
+                    elif not prototype.is_winner():
+                        helper(_child)
+                    else:
+
+                        if Board.WINNER == 'X':
+                            node.chance -= 1
+                        if Board.WINNER == 'O':
+                             node.chance += 1
+
+
+
+        helper(self.TREE._root)
+        options = []
+        for t in self.TREE._root.children:
+            options.append(t.count_chance())
+        answer = max(options)
+        ans = self.TREE._root.children[options.index(answer)].data
+        return ans.last_position
+
+    def make_move(self):
+        move = self.fill_tree()
         self.board.set_mark(self.SYMBOL, move)
